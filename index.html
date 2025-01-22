@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML to Escaped HTML Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.5;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .output {
+            margin-top: 20px;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML to Escaped HTML Converter</h1>
+    <p>Enter your HTML code below and click "Convert" to get the escaped HTML.</p>
+    <textarea id="htmlInput" placeholder="Enter your HTML code here..."></textarea>
+    <button onclick="convertToEscaped()">Convert</button>
+    <h2>Escaped HTML Output:</h2>
+    <textarea id="escapedOutput" class="output" readonly></textarea>
+
+    <script>
+        function convertToEscaped() {
+            const htmlInput = document.getElementById("htmlInput").value;
+            const escapedHTML = htmlInput
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#39;");
+            document.getElementById("escapedOutput").value = escapedHTML;
+        }
+    </script>
+</body>
+</html>
