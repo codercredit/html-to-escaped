@@ -4,40 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML to Escaped HTML Converter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            line-height: 1.5;
+            padding: 40px;
+            background-color: #f7f7f7;
         }
-        textarea {
-            width: 100%;
-            height: 150px;
-            margin-bottom: 10px;
+        .container {
+            max-width: 900px;
+        }
+        .output {
+            min-height: 150px;
             font-family: monospace;
             font-size: 14px;
         }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
+        .copy-btn {
             cursor: pointer;
+            padding: 6px 12px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin-top: 10px;
         }
-        .output {
-            margin-top: 20px;
-            background-color: #f4f4f4;
-            padding: 10px;
-            border: 1px solid #ddd;
+        .copy-btn:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
-    <h1>HTML to Escaped HTML Converter</h1>
-    <p>Enter your HTML code below and click "Convert" to get the escaped HTML.</p>
-    <textarea id="htmlInput" placeholder="Enter your HTML code here..."></textarea>
-    <button onclick="convertToEscaped()">Convert</button>
-    <h2>Escaped HTML Output:</h2>
-    <textarea id="escapedOutput" class="output" readonly></textarea>
+    <div class="container">
+        <h1 class="text-center mb-4">HTML to Escaped HTML Converter</h1>
+        <div class="mb-3">
+            <label for="htmlInput" class="form-label">Enter your HTML code:</label>
+            <textarea id="htmlInput" class="form-control" placeholder="Enter your HTML code here..." rows="8"></textarea>
+        </div>
+        <button class="btn btn-primary w-100" onclick="convertToEscaped()">Convert</button>
 
+        <h2 class="mt-4">Escaped HTML Output:</h2>
+        <div class="input-group">
+            <textarea id="escapedOutput" class="form-control output" readonly></textarea>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">
+                <i class="fas fa-copy"></i> Copy
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function convertToEscaped() {
             const htmlInput = document.getElementById("htmlInput").value;
@@ -48,6 +64,13 @@
                 .replace(/"/g, "&quot;")
                 .replace(/'/g, "&#39;");
             document.getElementById("escapedOutput").value = escapedHTML;
+        }
+
+        function copyToClipboard() {
+            const escapedOutput = document.getElementById("escapedOutput");
+            escapedOutput.select();
+            document.execCommand("copy");
+            alert("Escaped HTML copied to clipboard!");
         }
     </script>
 </body>
